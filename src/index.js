@@ -6,8 +6,9 @@
 
 
 // intialisation
+require('dotenv').config();
 const {Client, IntentsBitField} = require('discord.js');
-const config = require('../config.json');
+//const config = require('../config.json');
 
 const client = new Client({
     intents: [
@@ -27,6 +28,23 @@ client.on('ready', (c) =>{
    console.log('Zelenskyy bot працює!');
 });
 
+
+client.on('interactionCreate', (interaction) => {
+    if(!interaction.isChatInputCommand()) return;
+
+    if(interaction.commandName === 'hey'){
+        interaction.reply("hey");
+    }
+    if(interaction.commandName === 'ping'){
+        interaction.reply("pong");
+    }
+    if(interaction.commandName === 'moan'){
+        interaction.reply("auuuuuh");
+    }
+
+
+})
+/*
 // listening for incoming messages
 client.on('messageCreate',(message)=> {
    //displays the messages being said in the server
@@ -41,10 +59,17 @@ client.on('messageCreate',(message)=> {
     if(message.content === 'пінг'){
         message.reply('понг');
     }
+ 
 });
+*/
+//TODO mod commands
+
+
+
+
 
 // bot login takes token from config;.json 
-client.login(config.token);
+client.login(process.env.TOKEN);
 
 
 
